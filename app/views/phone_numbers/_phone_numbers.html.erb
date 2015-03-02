@@ -1,6 +1,6 @@
 <div id="phone_numbers">
   <ul>
-    <% @company.phone_numbers.each do |phone| %>
+    <% phone_numbers.each do |phone| %>
       <li><%= phone.number %>
         <%= link_to('edit', edit_phone_number_path(phone)) %>
         <%= link_to('delete', phone_number_path(phone), :method => "delete")%>
