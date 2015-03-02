@@ -1,5 +1,5 @@
 class PhoneNumbersController < ApplicationController
-  before_action :set_phone_number, only: [:edit, :update, :destroy]
+  before_action :find_resource, only: [:edit, :update, :destroy]
 
   # GET /phone_numbers/new
   def new
@@ -51,9 +51,6 @@ class PhoneNumbersController < ApplicationController
   end
 
   private
-    def set_phone_number
-      @phone_number = PhoneNumber.find(params[:id])
-    end
 
     def phone_number_params
       params.require(:phone_number).permit(:number, :contact_id, :contact_type)
