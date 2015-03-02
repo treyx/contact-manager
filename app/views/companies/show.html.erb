@@ -5,7 +5,7 @@
   <%= @company.name %>
 </p>
 
-<%= render 'phone_numbers/phone_numbers' %>
+<%= render 'phone_numbers/phone_numbers', :phone_numbers => @company.phone_numbers %>
 
 <div id="email_addresses">
   <ul>
