@@ -9,16 +9,9 @@
   <strong>Last name:</strong>
   <%= @person.last_name %>
 </p>
-<div id="phone_numbers"
-<ul>
-  <% @person.phone_numbers.each do |phone| %>
-    <li><%= phone.number %> 
-    <%= link_to('edit', edit_phone_number_path(phone)) %>
-    <%= link_to('delete', phone_number_path(phone), :method => "delete")%>
-    </li>
-  <% end %>
-</ul>
-</div>
+
+<%= render 'phone_numbers/phone_numbers', :phone_numbers => @person.phone_numbers %>
+
 <div id="email_addresses"
 <ul>
   <% @person.email_addresses.each do |email| %>
