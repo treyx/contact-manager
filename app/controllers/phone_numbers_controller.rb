@@ -1,6 +1,7 @@
 class PhoneNumbersController < ApplicationController
   before_action :set_phone_number, only: [:show, :edit, :update, :destroy]
 
+
   # GET /phone_numbers
   # GET /phone_numbers.json
   def index
@@ -14,7 +15,7 @@ class PhoneNumbersController < ApplicationController
 
   # GET /phone_numbers/new
   def new
-    @phone_number = PhoneNumber.new(person_id: params[:person_id])
+    @phone_number = PhoneNumber.new(contact_id: params[:contact_id], contact_type: params[:contact_type])
   end
 
   # GET /phone_numbers/1/edit
@@ -28,7 +29,7 @@ class PhoneNumbersController < ApplicationController
 
     respond_to do |format|
       if @phone_number.save
-        format.html { redirect_to @phone_number.person, notice: 'Phone number was successfully created.' }
+        format.html { redirect_to @phone_number.contact, notice: 'Phone number was successfully created.' }
         format.json { render :show, status: :created, location: @phone_number }
       else
         format.html { render :new }
@@ -42,7 +43,7 @@ class PhoneNumbersController < ApplicationController
   def update
     respond_to do |format|
       if @phone_number.update(phone_number_params)
-        format.html { redirect_to @phone_number.person, notice: 'Phone number was successfully updated.' }
+        format.html { redirect_to @phone_number.contact, notice: 'Phone number was successfully updated.' }
         format.json { render :show, status: :ok, location: @phone_number }
       else
         format.html { render :edit }
@@ -56,19 +57,17 @@ class PhoneNumbersController < ApplicationController
   def destroy
     @phone_number.destroy
     respond_to do |format|
-      format.html { redirect_to @phone_number.person, notice: 'Phone number was successfully destroyed.' }
+      format.html { redirect_to @phone_number.contact, notice: 'Phone number was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_phone_number
       @phone_number = PhoneNumber.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def phone_number_params
-      params.require(:phone_number).permit(:number, :person_id)
+      params.require(:phone_number).permit(:number, :contact_id, :contact_type)
     end
 end
