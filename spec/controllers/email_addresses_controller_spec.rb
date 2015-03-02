@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe EmailAddressesController, type: :controller do
+  let(:person) { Person.create(first_name: "Adam", last_name: "Smith") }
   let(:valid_attributes) {
-    { address: 'example@example.com', person_id: '1' }
+    { address: 'example@example.com', person_id: person.id }
   }
 
   let(:invalid_attributes) {
@@ -80,7 +81,7 @@ RSpec.describe EmailAddressesController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        { address: 'example@example.com', person_id: '1' }
+        { address: 'example@example.com', person_id: person.id }
       }
 
       it "updates the requested email_address" do
@@ -88,7 +89,7 @@ RSpec.describe EmailAddressesController, type: :controller do
         put :update, {:id => email_address.to_param, :email_address => new_attributes}, valid_session
         email_address.reload
         expect(email_address.address).to eq('example@example.com')
-        expect(email_address.person_id).to eq(1)
+        expect(email_address.person_id).to eq(person.id)
       end
 
       it "assigns the requested email_address as @email_address" do
@@ -100,7 +101,7 @@ RSpec.describe EmailAddressesController, type: :controller do
       it "redirects to the email_address" do
         email_address = EmailAddress.create! valid_attributes
         put :update, {:id => email_address.to_param, :email_address => valid_attributes}, valid_session
-        expect(response).to redirect_to(email_address)
+        expect(response).to redirect_to(email_address.person)
       end
     end
 

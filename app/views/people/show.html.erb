@@ -9,7 +9,7 @@
   <strong>Last name:</strong>
   <%= @person.last_name %>
 </p>
-
+<div id="phone_numbers"
 <ul>
   <% @person.phone_numbers.each do |phone| %>
     <li><%= phone.number %> 
@@ -18,12 +18,16 @@
     </li>
   <% end %>
 </ul>
-
+</div>
+<div id="email_addresses"
 <ul>
   <% @person.email_addresses.each do |email| %>
-    <li><%= email.address %></li>
+    <li><%= email.address %>
+    <%= link_to('edit', edit_email_address_path(email)) %>
+    </li>
   <% end %>
 </ul>
+</div>
 
 <%= link_to 'Add phone number', new_phone_number_path(person_id: @person.id) %> |
 <%= link_to 'Add email address', new_email_address_path(person_id: @person.id) %> |
