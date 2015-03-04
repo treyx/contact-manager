@@ -1,34 +1,17 @@
-<p id="notice"><%= notice %></p>
+<div class'company'>
+  <p id="notice"><%= notice %></p>
+  
+  <h3> <%= @company.name %> </h3>
 
-<p>
-  <strong>Name:</strong>
-  <%= @company.name %>
-</p>
 
-<div id="phone_numbers">
-  <ul>
-    <% @company.phone_numbers.each do |phone| %>
-      <li><%= phone.number %>
-        <%= link_to('edit', edit_phone_number_path(phone)) %>
-        <%= link_to('delete', phone_number_path(phone), :method => "delete")%>
-      </li>
-    <% end %>
+  <%= render 'phone_numbers/phone_numbers', :phone_numbers => @company.phone_numbers %>
+  
+  <%= render 'email_addresses/email_addresses', :email_addresses => @company.email_addresses %>
+
+  <ul class 'actions'>
+    <li><%= link_to 'Add phone number', new_phone_number_path(contact_id: @company.id, contact_type: 'Company') %> </li>
+    <li><%= link_to 'Add email address', new_email_address_path(contact_id: @company.id, contact_type: 'Company') %></li>
+    <li><%= link_to 'Edit', edit_company_path(@company) %></li>
+    <li><%= link_to 'Back', companies_path %></li>
   </ul>
 </div>
-
-<div id="email_addresses">
-  <ul>
-    <% @company.email_addresses.each do |email| %>
-      <li><%= email.address %>
-        <%= link_to('edit', edit_email_address_path(email)) %>
-        <%= link_to('delete', email_address_path(email), :method => "delete") %>
-      </li>
-    <% end %>
-  </ul>
-</div>
-
-
-<%= link_to 'Add phone number', new_phone_number_path(contact_id: @company.id, contact_type: 'Company') %> |
-<%= link_to 'Add email address', new_email_address_path(contact_id: @company.id, contact_type: 'Company') %> |
-<%= link_to 'Edit', edit_company_path(@company) %> |
-<%= link_to 'Back', companies_path %>
