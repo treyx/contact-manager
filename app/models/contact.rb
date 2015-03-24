@@ -8,5 +8,4 @@ module Contact
 
   module ClassMethods
   end
-
 end
